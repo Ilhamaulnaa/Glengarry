@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Glengarry</string>
+    <string name="label_fashion">Fashion</string>
+    <string name="label_electronic">Electronic</string>
+    <string name="label_book">Book Station</string>
+    <string name="label_sport">Sport</string>
 </resources>

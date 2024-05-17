@@ -13,12 +13,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,16 +40,30 @@ import com.glengarry.app.ui.theme.GlengarryTheme
 import com.glengarry.app.ui.theme.blue
 import com.glengarry.app.ui.theme.darkBlue
 import com.glengarry.app.ui.theme.grey
+import kotlinx.coroutines.launch
 
 @ExperimentalMaterial3Api
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    navigateToRegisterScreen: () -> Unit = {},
+    navigateToMainScreen: () -> Unit = {},
+    navigateForgotPassword: () -> Unit = {}
+) {
+
+    val snackBarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
     var email by remember {
         mutableStateOf("")
     }
     var password by remember {
         mutableStateOf("")
+    }
+
+    val onSignUpWithGoogle: () -> Unit = {
+       scope.launch {
+           snackBarHostState.showSnackbar("Sign Up with Google not implement yet")
+       }
     }
 
     Column(
@@ -105,7 +121,7 @@ fun LoginScreen() {
             BaseText(
                 modifier = Modifier
                     .weight(1f)
-                    .clickable { },
+                    .clickable { navigateToRegisterScreen() },
                 text = "Register",
                 color = blue,
                 fontSize = 12.sp,
@@ -113,7 +129,7 @@ fun LoginScreen() {
             )
             BaseText(
                 modifier = Modifier
-                    .clickable { },
+                    .clickable { navigateForgotPassword() },
                 text = "Lupa password?",
                 color = blue,
                 fontSize = 12.sp,
@@ -123,7 +139,7 @@ fun LoginScreen() {
         Spacer(modifier = Modifier.height(26.dp))
         PrimaryButton(
             text = "Login",
-            onClick = {},
+            onClick = { navigateToMainScreen() },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(26.dp))
@@ -131,7 +147,7 @@ fun LoginScreen() {
         Spacer(modifier = Modifier.height(26.dp))
         ButtonWithGoogle(
             modifier = Modifier.fillMaxWidth(),
-            onCLick = {}
+            onCLick = { onSignUpWithGoogle() }
         )
     }
 }
