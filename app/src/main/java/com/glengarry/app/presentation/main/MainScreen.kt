@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -19,6 +20,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.QrCodeScanner
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +42,8 @@ import com.glengarry.app.presentation.main.navigation.Screen
 import com.glengarry.app.ui.theme.GlengarryTheme
 import com.glengarry.app.ui.theme.darkBlue
 
+@ExperimentalMaterial3Api
+@ExperimentalLayoutApi
 @ExperimentalFoundationApi
 @Composable
 fun MainScreen(
@@ -108,6 +112,8 @@ fun MainScreen(
     
 }
 
+@ExperimentalMaterial3Api
+@ExperimentalLayoutApi
 @ExperimentalFoundationApi
 @Preview
 @Composable

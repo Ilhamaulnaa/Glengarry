@@ -15,4 +15,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Glengarry"
 include(":app")
- 
+include(":core:domain")
+include(":core:domain")
+include(":common")

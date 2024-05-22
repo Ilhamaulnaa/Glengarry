@@ -54,7 +54,7 @@ fun TypewriterText(texts: List<String>) {
         fontFamily = poppinsFontFamily,
         fontWeight = FontWeight.Medium,
         maxLines = 1,
-        color = Color.White
+        color = Color(0xFF999999)
     )
     
 }

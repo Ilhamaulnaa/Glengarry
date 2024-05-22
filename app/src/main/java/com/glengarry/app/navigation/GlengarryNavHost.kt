@@ -1,6 +1,7 @@
 package com.glengarry.app.navigation
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
@@ -13,6 +14,7 @@ import com.glengarry.app.presentation.main.MainScreen
 import com.glengarry.app.presentation.main.navigation.EmptyMainNavigator
 import com.glengarry.app.presentation.splashscreen.SplashScreen
 
+@ExperimentalLayoutApi
 @ExperimentalFoundationApi
 @ExperimentalMaterial3Api
 @Composable
