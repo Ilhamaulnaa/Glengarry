@@ -52,7 +52,7 @@ fun SearchBarWithFilter(
             onValueChange = onValueChanged,
             placeholder = placeholder
         )
-        TypewriterText(texts = texts)
+//        TypewriterText(texts = texts)
         Spacer(modifier = Modifier.width(10.dp))
         Box(
             modifier = Modifier
@@ -111,8 +111,9 @@ fun SearchBarWithFilterPreview() {
         ) {
             SearchBarWithFilter(
                 modifier = Modifier.padding(16.dp),
-                value = "",
-                texts = texts
+                value = "Search",
+                texts = texts,
+                placeholder = "Search"
             )
         }
     }

@@ -1,6 +1,7 @@
 package com.glengarry.app.ui.textfield
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -31,13 +32,13 @@ import com.glengarry.app.ui.theme.GlengarryTheme
 val smallTextFieldColors @Composable get() =  TextFieldDefaults.outlinedTextFieldColors(
     disabledBorderColor = Color.Transparent,
     unfocusedBorderColor = Color.Transparent,
-    focusedBorderColor = Color(0xFF999999),
-    containerColor = Color(0xFFF5F2F8)
+    focusedBorderColor = Color(0xFF080020),
+    containerColor = Color.White
 )
 
 val smallTextFieldStyle @Composable get() = MaterialTheme.typography.bodyMedium.copy(
     fontWeight = FontWeight.SemiBold,
-    color = Color(0xFF999999),
+    color = Color(0xFF080020),
     fontSize = 14.sp,
 )
 
@@ -61,7 +62,13 @@ fun SmallSearchBar(
         colors = colors,
         singleLine = true,
         contentPadding = PaddingValues(horizontal = 12.dp, vertical = 8.dp),
-        modifier = modifier.height(40.dp),
+        modifier = modifier
+            .border(
+                width = 1.dp,
+                color = Color(0xFF999999),
+                shape = RoundedCornerShape(10.dp)
+            )
+            .height(40.dp),
         leadingIcon = {
             Row {
                 Image(

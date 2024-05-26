@@ -39,6 +39,7 @@ import com.glengarry.app.presentation.main.component.BottomBar
 import com.glengarry.app.presentation.main.navigation.EmptyMainNavigator
 import com.glengarry.app.presentation.main.navigation.MainNavigator
 import com.glengarry.app.presentation.main.navigation.Screen
+import com.glengarry.app.presentation.notification.list.NotificationScreen
 import com.glengarry.app.ui.theme.GlengarryTheme
 import com.glengarry.app.ui.theme.darkBlue
 
@@ -57,7 +58,7 @@ fun MainScreen(
             BottomBar(
                 navController = navController,
                 modifier = Modifier
-                    .shadow( elevation = 1.dp )
+                    .shadow(elevation = 1.dp)
                     .fillMaxWidth()
                     .navigationBarsPadding()
             )
@@ -98,7 +99,7 @@ fun MainScreen(
                HomeScreen()
            }
            composable(Screen.Notification.route){
-
+               NotificationScreen()
            }
            composable(Screen.Shop.route){
 
