@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Surface
@@ -31,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.core.domain.model.ServiceItem
+import com.core.domain.model.ServiceType
 import com.glengarry.app.R
 import com.glengarry.app.presentation.home.component.HomeCarousel
 import com.glengarry.app.presentation.home.component.HomeHeader
@@ -77,14 +79,63 @@ fun HomeScreen(
         MenuItem(icon = R.drawable.logo_sport, label = R.string.label_sport)
     )
 
-    val numbers = (1..6).toList()
-    val needItem = ServiceItem(
-        id = "1",
-        logo = "",
-        title = "Brand Update",
-        rating = 4.9,
-        minPrice = 100_000.00,
-        serviceType = "Sport"
+//    val numbers = (1..6).toList()
+    val needItem = listOf(
+        ServiceItem(
+            id = "1",
+            logo = "",
+            title = "Brand Update",
+            rating = 4.0,
+            minPrice = 250_000.00,
+            serviceType = "Sport",
+            type = ServiceType.SPORT
+        ),
+        ServiceItem(
+            id = "2",
+            logo = "",
+            title = "Brand Update",
+            rating = 4.9,
+            minPrice = 150_000.00,
+            serviceType = "Fashion",
+            type = ServiceType.FASHION
+        ),
+        ServiceItem(
+            id = "3",
+            logo = "",
+            title = "Brand Update",
+            rating = 4.4,
+            minPrice = 100_000.00,
+            serviceType = "Fashion",
+            type = ServiceType.FASHION
+        ),
+        ServiceItem(
+            id = "4",
+            logo = "",
+            title = "Brand Update",
+            rating = 4.2,
+            minPrice = 730_000.00,
+            serviceType = "Electronic",
+            type = ServiceType.ELECTRONIC
+        ),
+        ServiceItem(
+            id = "5",
+            logo = "",
+            title = "Brand Update",
+            rating = 4.4,
+            minPrice = 100_000.00,
+            serviceType = "Sport",
+            type = ServiceType.SPORT
+        ),
+        ServiceItem(
+            id = "6",
+            logo = "",
+            title = "Brand Update",
+            rating = 4.8,
+            minPrice = 56_000.00,
+            serviceType = "Book",
+            type = ServiceType.BOOK
+        ),
+
     )
 
     val onMenuClick: (MenuItem) -> Unit = {}
@@ -150,10 +201,10 @@ fun HomeScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ){
-                items(numbers.size){
+                items(items = needItem, key = { it.id} ){
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         CardItem(
-                            needItem = needItem,
+                            needItem = it,
                             onClick = {}
                         )
                     }

@@ -4,7 +4,7 @@ import android.media.Rating
 
 
 enum class ServiceType{
-    FASHION, ELECTRONIC, BOOK, Sport
+    FASHION, ELECTRONIC, BOOK, SPORT
 }
 data class ServiceItem(
     val id: String = "",
@@ -13,5 +13,5 @@ data class ServiceItem(
     val rating: Double = 0.0,
     val minPrice: Double = 0.0,
     val serviceType: String = "",
-    val type: ServiceType = ServiceType.Sport
+    val type: ServiceType = ServiceType.SPORT
 )

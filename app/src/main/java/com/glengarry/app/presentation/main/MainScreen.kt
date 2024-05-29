@@ -40,6 +40,8 @@ import com.glengarry.app.presentation.main.navigation.EmptyMainNavigator
 import com.glengarry.app.presentation.main.navigation.MainNavigator
 import com.glengarry.app.presentation.main.navigation.Screen
 import com.glengarry.app.presentation.notification.list.NotificationScreen
+import com.glengarry.app.presentation.profile.ProfileScreen
+import com.glengarry.app.presentation.shop.ShopScreen
 import com.glengarry.app.ui.theme.GlengarryTheme
 import com.glengarry.app.ui.theme.darkBlue
 
@@ -102,10 +104,10 @@ fun MainScreen(
                NotificationScreen()
            }
            composable(Screen.Shop.route){
-
+               ShopScreen()
            }
            composable(Screen.Profile.route){
-
+               ProfileScreen()
            }
        }
 
