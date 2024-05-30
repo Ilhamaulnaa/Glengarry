@@ -34,6 +34,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.glengarry.app.navigation.NavMainNavigator
+import com.glengarry.app.navigation.navigateToLoginScreen
 import com.glengarry.app.presentation.home.HomeScreen
 import com.glengarry.app.presentation.main.component.BottomBar
 import com.glengarry.app.presentation.main.navigation.EmptyMainNavigator
@@ -60,7 +61,6 @@ fun MainScreen(
             BottomBar(
                 navController = navController,
                 modifier = Modifier
-                    .shadow(elevation = 1.dp)
                     .fillMaxWidth()
                     .navigationBarsPadding()
             )
@@ -71,11 +71,7 @@ fun MainScreen(
                     .offset(y = 40.dp)
                     .clip(CircleShape)
                     .clickable { }
-                    .border(
-                        color = Color.Black,
-                        width = 1.dp
-                    )
-                    .size(48.dp)
+                    .size(40.dp)
                     .background(Color.White),
                 contentAlignment = Alignment.Center
             ){
@@ -83,7 +79,7 @@ fun MainScreen(
                     imageVector = Icons.Filled.QrCodeScanner,
                     contentDescription = "scan",
                     tint = Color.Black,
-                    modifier = Modifier.size(48.dp)
+                    modifier = Modifier.size(30.dp)
                 )
             }
         },
@@ -107,7 +103,9 @@ fun MainScreen(
                ShopScreen()
            }
            composable(Screen.Profile.route){
-               ProfileScreen()
+               ProfileScreen(
+                   navigateToLoginScreen = mainNavigator::navigateToLoginScreen
+               )
            }
        }
 

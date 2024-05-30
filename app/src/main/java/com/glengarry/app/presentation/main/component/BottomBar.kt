@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -60,11 +61,11 @@ fun BottomBar(
     )
     Row (
         modifier = modifier
+            .background(Color.White)
             .height(70.dp)
-            .padding(horizontal = 28.dp, vertical = 24.dp)
-            .background(Color.White),
+            .padding(horizontal = 18.dp),
+        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
     ){
 
         IconButton(
@@ -115,7 +116,7 @@ fun BottomBar(
                 contentDescription = notification.title,
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
-                    .height(32.dp)
+                    .height(24.dp)
                     .size(24.dp)
             )
         }

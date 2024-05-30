@@ -56,8 +56,8 @@ fun CustomButtonProfile(
                 shape = RoundedCornerShape(12.dp)
             )
             .height(39.dp)
-            .background(Color(0xFFF5F2F8))
-            .clickable { onCLick }
+            .background(Color(0xFFF5F2F8), shape = RoundedCornerShape(12.dp))
+            .clickable { onCLick() }
             .clip(RoundedCornerShape(12.dp)),
         horizontalArrangement = Arrangement.Start,
         verticalAlignment = Alignment.CenterVertically
@@ -86,37 +86,6 @@ fun CustomButtonProfile(
             modifier = Modifier.padding(horizontal = 16.dp)
         )
     }
-
-//    Box (
-//        modifier = modifier
-//            .height(39.dp)
-//            .clickable { onCLick }
-//    ){
-//        Row (
-//            modifier = Modifier.fillMaxWidth(),
-//            horizontalArrangement = Arrangement.Center,
-//            verticalAlignment = Alignment.CenterVertically
-//        ){
-//            Image(
-//                painter = painterResource(id = img),
-//                contentDescription = null,
-//                modifier = Modifier.size(20.dp)
-//            )
-//            Spacer(modifier = Modifier.width(15.dp))
-//            BasicTextField(
-//                modifier = Modifier
-//                    .weight(1f)
-//                    .clickable { onCLick() },
-//                value = value,
-//                onValueChange = onValueChange,
-//                readOnly = true,
-//            )
-//            Icon(
-//                imageVector = Icons.Filled.ArrowForwardIos,
-//                contentDescription = null
-//            )
-//        }
-//    }
 }
 
 @ExperimentalMaterial3Api

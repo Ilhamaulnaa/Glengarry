@@ -31,6 +31,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.core.domain.model.Resource
 import com.core.domain.model.ServiceItem
 import com.core.domain.model.ServiceType
 import com.glengarry.app.R
@@ -55,6 +56,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier
 ) {
 
+    val scrollState = rememberScrollState()
 
     var search by remember {
         mutableStateOf("")
@@ -135,6 +137,24 @@ fun HomeScreen(
             serviceType = "Book",
             type = ServiceType.BOOK
         ),
+        ServiceItem(
+            id = "7",
+            logo = "",
+            title = "Brand Update",
+            rating = 4.0,
+            minPrice = 56_000.00,
+            serviceType = "Electronic",
+            type = ServiceType.ELECTRONIC
+        ),
+        ServiceItem(
+            id = "8",
+            logo = "",
+            title = "Brand Update",
+            rating = 4.7,
+            minPrice = 56_000.00,
+            serviceType = "Fashion",
+            type = ServiceType.FASHION
+        ),
 
     )
 
@@ -152,7 +172,7 @@ fun HomeScreen(
                         .padding(horizontal = 20.dp)
                 )
                 SearchBarWithFilter(
-                    modifier = Modifier.padding(horizontal = 20.dp),
+                    modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp),
                     value = search,
                     texts = texts,
                     onValueChanged = { search = it },
@@ -166,7 +186,8 @@ fun HomeScreen(
 
         Column(
             modifier = Modifier
-                .padding(paddingValues),
+                .padding(paddingValues)
+                .verticalScroll(scrollState),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -195,19 +216,18 @@ fun HomeScreen(
                     )
             )
             Spacer(modifier = Modifier.height(16.dp))
-            LazyVerticalGrid(
+            FlowRow(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                columns = GridCells.Fixed(2),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                maxItemsInEachRow = 2
             ){
-                items(items = needItem, key = { it.id} ){
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        CardItem(
-                            needItem = it,
-                            onClick = {}
-                        )
-                    }
+                for (needItem in needItem){
+                    CardItem(
+                        needItem = needItem,
+                        modifier = Modifier.weight(1f),
+                        onClick = {}
+                    )
                 }
             }
 //        FlowRow(
@@ -227,6 +247,7 @@ fun HomeScreen(
                 text = "See All",
                 onClick = {},
             )
+            Spacer(modifier = Modifier.height(60.dp))
         }
     }
 

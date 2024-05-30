@@ -25,6 +25,8 @@ import com.glengarry.app.R
 import com.glengarry.app.presentation.profile.component.CustomButtonProfile
 import com.glengarry.app.presentation.profile.component.ProfileHeader
 import com.glengarry.app.presentation.profile.domain.Profile
+import com.glengarry.app.ui.dialog.BaseDialog
+import com.glengarry.app.ui.dialog.BaseDialogButton
 import com.glengarry.app.ui.theme.GlengarryTheme
 import com.glengarry.app.ui.theme.poppinsFontFamily
 import com.glengarry.app.ui.topbar.BaseTopAppBar
@@ -34,6 +36,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
+    navigateToLoginScreen: () -> Unit = {}
 //    viewModel: ProfileViewModel = koinViewModel()
 ) {
 
@@ -50,6 +53,9 @@ fun ProfileScreen(
         "ilhmaulnaa@gmail.com"
     )
 
+    var showLogoutDialog by remember { mutableStateOf(false) }
+    val hideShowDialog = { showLogoutDialog = false }
+
 //    LaunchedEffect(key1 = user){
 //        if (user is Resource.Success){
 //            val data = user.data
@@ -60,6 +66,24 @@ fun ProfileScreen(
 //            )
 //        }
 //    }
+
+    val onLogout: () -> Unit = {
+        navigateToLoginScreen()
+    }
+
+    if (showLogoutDialog){
+        BaseDialog(
+            message = "Are you sure you want to logout?" ,
+            positiveButton = BaseDialogButton(
+                title = "Yes",
+                onClick = onLogout
+            ),
+            negativeButton = BaseDialogButton(
+                title = "Cancel",
+                onClick = hideShowDialog
+            )
+        )
+    }
 
     Scaffold(
         topBar = {
@@ -110,8 +134,8 @@ fun ProfileScreen(
             CustomButtonProfile(
                 img = R.drawable.ic_logout,
                 text = "Logout",
-                onCLick = {},
-                modifier = Modifier.padding(horizontal = 20.dp)
+                modifier = Modifier.padding(horizontal = 20.dp),
+                onCLick = { showLogoutDialog = true },
             )
         }
 

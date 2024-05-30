@@ -78,9 +78,6 @@ dependencies {
     implementation("androidx.camera:camera-lifecycle:1.3.3")
     implementation("androidx.camera:camera-view:1.3.3")
 
-    //Zxing
-    implementation("androidx.goole.zxing:core:3.5.3")
-
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
     implementation("androidx.navigation:navigation-compose:2.7.7")

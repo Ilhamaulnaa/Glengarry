@@ -1,6 +1,5 @@
 package com.glengarry.app.navigation
 
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.glengarry.app.presentation.main.navigation.MainNavigator
 import kotlin.jvm.Throws
@@ -9,16 +8,22 @@ class NavMainNavigator(
     private val navController: NavHostController
 ): MainNavigator {
     override fun navigateToLoginScreen() { navController.navigateToLoginScreen() }
-
     override fun navigateToRegisterScreen() { navController.navigateToRegisterScreen() }
     override fun navigateToForgotPassordScreen() { navController.navigateToForgotPasswordScreen() }
-
     override fun navigateToMainScreen() { navController.navigateToMainScreen() }
 }
 
 @Throws(IllegalArgumentException::class)
-fun NavHostController.navigateToLoginScreen(){
-    navigate(Screen.Login.route)
+fun NavHostController.navigateToLoginScreen(
+    clearBackStack:Boolean = true,
+    from: Screen = Screen.Main
+){
+    navigate(Screen.Login.route){
+        if (!clearBackStack) return@navigate
+        popUpTo(from.route){
+            inclusive = true
+        }
+    }
 }
 
 @Throws(IllegalArgumentException::class)

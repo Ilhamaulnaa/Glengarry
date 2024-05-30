@@ -4,8 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-feature android:name="android.permission.CAMERA"/>
-    <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.plcoding.qrcodescannercompose"/>
 
     <application
         android:allowBackup="true"
