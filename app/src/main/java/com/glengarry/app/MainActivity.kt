@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -16,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.glengarry.app.navigation.GlengarryNavHost
 import com.glengarry.app.ui.theme.GlengarryTheme
 
+@ExperimentalMaterialApi
 @ExperimentalLayoutApi
 @ExperimentalFoundationApi
 @ExperimentalMaterial3Api

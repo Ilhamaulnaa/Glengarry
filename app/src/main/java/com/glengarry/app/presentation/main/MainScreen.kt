@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.FabPosition
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
@@ -46,6 +47,7 @@ import com.glengarry.app.presentation.shop.ShopScreen
 import com.glengarry.app.ui.theme.GlengarryTheme
 import com.glengarry.app.ui.theme.darkBlue
 
+@ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @ExperimentalLayoutApi
 @ExperimentalFoundationApi
@@ -94,7 +96,13 @@ fun MainScreen(
                .padding(bottom = paddingValues.calculateBottomPadding() - 48.dp )
        ){
            composable(Screen.Home.route){
-               HomeScreen()
+               HomeScreen(
+                   navigateToDetailFashionScreen = mainNavigator::navigateToDetailFashionScreen,
+                   navigateToDetailElectronicScreen = mainNavigator::navigateToDetailElectronicScreen,
+                   navigateToDetailBookScreen = mainNavigator::navigateToDetailBookScreen,
+                   navigateToDetailSportScreen = mainNavigator::navigateToDetailSportScreen,
+
+               )
            }
            composable(Screen.Notification.route){
                NotificationScreen()
@@ -104,15 +112,19 @@ fun MainScreen(
            }
            composable(Screen.Profile.route){
                ProfileScreen(
-                   navigateToLoginScreen = mainNavigator::navigateToLoginScreen
+                   navigateToLoginScreen = mainNavigator::navigateToLoginScreen,
+                   navigateToPrivacyScreen = mainNavigator::navigateToPrivacyScreen,
+                   navigateToPurchaseScreen = mainNavigator::navigateToPurchaseScreen,
+                   navigateToHelpScreen = mainNavigator::navigateToHelpSupportScreen,
+                   navigateToInviteScreen = mainNavigator::navigateToInviteFriendScreen
                )
            }
        }
-
     }
     
 }
 
+@ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @ExperimentalLayoutApi
 @ExperimentalFoundationApi

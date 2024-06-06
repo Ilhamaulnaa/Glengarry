@@ -36,7 +36,11 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
-    navigateToLoginScreen: () -> Unit = {}
+    navigateToPrivacyScreen: () -> Unit = {},
+    navigateToPurchaseScreen: () -> Unit = {},
+    navigateToHelpScreen: () -> Unit = {},
+    navigateToInviteScreen: () -> Unit = {},
+    navigateToLoginScreen: () -> Unit = {},
 //    viewModel: ProfileViewModel = koinViewModel()
 ) {
 
@@ -66,6 +70,7 @@ fun ProfileScreen(
 //            )
 //        }
 //    }
+
 
     val onLogout: () -> Unit = {
         navigateToLoginScreen()
@@ -106,28 +111,28 @@ fun ProfileScreen(
             CustomButtonProfile(
                 img = R.drawable.ic_privacy,
                 text = "Privacy",
-                onCLick = {},
+                onCLick = { navigateToPrivacyScreen() },
                 modifier = Modifier.padding(horizontal = 20.dp)
             )
             Spacer(modifier = Modifier.height(21.dp))
             CustomButtonProfile(
                 img = R.drawable.ic_refresh,
                 text = "Purchase History",
-                onCLick = {},
+                onCLick = navigateToPurchaseScreen,
                 modifier = Modifier.padding(horizontal = 20.dp)
             )
             Spacer(modifier = Modifier.height(21.dp))
             CustomButtonProfile(
                 img = R.drawable.ic_help,
                 text = "Help & Support",
-                onCLick = {},
+                onCLick = navigateToHelpScreen,
                 modifier = Modifier.padding(horizontal = 20.dp)
             )
             Spacer(modifier = Modifier.height(21.dp))
             CustomButtonProfile(
                 img = R.drawable.ic_person_add,
                 text = "Invite a Friend",
-                onCLick = {},
+                onCLick = navigateToInviteScreen,
                 modifier = Modifier.padding(horizontal = 20.dp)
             )
             Spacer(modifier = Modifier.height(21.dp))
