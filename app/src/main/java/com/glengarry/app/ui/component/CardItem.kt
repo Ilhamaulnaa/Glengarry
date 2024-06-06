@@ -50,7 +50,7 @@ fun CardItem(
         modifier = modifier
             .border(width = 1.dp, shape = RoundedCornerShape(10.dp), color = Color(0xFF4D4D4D))
             .clip(RoundedCornerShape(10.dp))
-            .clickable { onClick }
+            .clickable { onClick(needItem) }
             .padding(start = 10.dp, top = 10.dp, end = 10.dp, bottom = 5.dp)
     ) {
         BaseText(
