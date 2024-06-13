@@ -11,15 +11,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.glengarry.app.ui.button.PrimaryButton
 import com.glengarry.app.ui.button.SmallPrimaryButton
 import com.glengarry.app.ui.button.SmallPrimaryButtonWhite
 import com.glengarry.app.ui.theme.GlengarryTheme
 
+data class ButtonAttributes(
+    val title: String = "",
+    val onClick: () -> Unit = {},
+    val loading: Boolean = false
+)
 @Composable
 fun DetailBottomNavigation(
     modifier: Modifier = Modifier,
-    onBuyClick: () -> Unit = {},
-    onCartClick: () -> Unit = {}
+    primaryButton: ButtonAttributes,
+    secondaryButton: ButtonAttributes
 ) {
 
 
@@ -29,14 +35,14 @@ fun DetailBottomNavigation(
         verticalAlignment = Alignment.CenterVertically
     ) {
         SmallPrimaryButtonWhite(
-            text = "Buy Now",
-            onClick = onBuyClick,
+            text = secondaryButton.title,
+            onClick = secondaryButton.onClick,
             modifier = Modifier.weight(1f)
         )
         Spacer(modifier = Modifier.width(8.dp))
         SmallPrimaryButton(
-            text = "+ Cart",
-            onClick = onCartClick,
+            text = primaryButton.title,
+            onClick = primaryButton.onClick,
             modifier = Modifier.weight(1f)
         )
     }
@@ -48,7 +54,14 @@ fun DetailBottomNavigation(
 fun DetailBottomNavigationPreview() {
     GlengarryTheme {
         Surface {
-            DetailBottomNavigation()
+            DetailBottomNavigation(
+                primaryButton = ButtonAttributes(
+                    title = "Market Now"
+                ),
+                secondaryButton = ButtonAttributes(
+                    title = "Cancel"
+                )
+            )
         }
     }
 }

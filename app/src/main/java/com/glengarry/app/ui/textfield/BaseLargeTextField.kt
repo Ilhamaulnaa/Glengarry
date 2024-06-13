@@ -50,6 +50,7 @@ fun BaseLargeTextField(
     label: String = "",
     isError: Boolean = false,
     supportingText: String = "",
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     colors: androidx.compose.material3.TextFieldColors = largeTextFieldColors,

@@ -16,8 +16,11 @@ import androidx.compose.material.Surface
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +29,7 @@ import com.core.domain.model.Resource
 import com.glengarry.app.presentation.fashion.component.DetailFashionHeader
 import com.glengarry.app.presentation.fashion.component.DetailFashionInformationSection
 import com.glengarry.app.presentation.fashion.domain.FashionDetail
+import com.glengarry.app.ui.bottomnavigation.ButtonAttributes
 import com.glengarry.app.ui.bottomnavigation.DetailBottomNavigation
 import com.glengarry.app.ui.theme.GlengarryTheme
 import com.glengarry.app.ui.topbar.DetailTopAppBar
@@ -67,6 +71,30 @@ fun DetailFashionScreen(
         description = "Harap pastikan pesanan sudah sesuai sebelum di checkout, produk dengan kualitas yg mampu bersaing dengan brand terkenal"
     )
 
+    var primaryButtonTittle by remember {
+        mutableStateOf("Buy Now")
+    }
+    var secondaryButtonTittle by remember {
+        mutableStateOf("+ Cart")
+    }
+
+    val primaryButton by remember(key1 = primaryButtonTittle) {
+        mutableStateOf(
+            ButtonAttributes(
+                title = primaryButtonTittle,
+                onClick = onBuyClick,
+            )
+        )
+    }
+    val secondaryButton by remember(key1 = secondaryButtonTittle) {
+        mutableStateOf(
+            ButtonAttributes(
+                title = secondaryButtonTittle,
+                onClick = onCartClick,
+            )
+        )
+    }
+
     Scaffold(
         topBar = {
             DetailTopAppBar(
@@ -79,8 +107,8 @@ fun DetailFashionScreen(
                 modifier = Modifier
                     .padding(horizontal = 20.dp)
                     .padding(bottom = 16.dp),
-                onBuyClick = onBuyClick,
-                onCartClick = onCartClick,
+                primaryButton = primaryButton,
+                secondaryButton = secondaryButton,
             )
         },
         modifier = modifier

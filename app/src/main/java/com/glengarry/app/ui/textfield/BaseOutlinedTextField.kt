@@ -47,7 +47,8 @@ fun BaseOutlinedTextField(
     keyboardOptions: KeyboardOptions = KeyboardOptions(),
     keyboardActions: KeyboardActions = KeyboardActions(),
     singleLine: Boolean = false,
-    maxLine: Int = Int.MAX_VALUE,
+    minLines: Int = 1,
+    maxLines: Int = Int.MAX_VALUE,
     interactionSource: MutableInteractionSource = remember {MutableInteractionSource()},
     shape: Shape = TextFieldDefaults.outlinedShape,
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors(),
@@ -66,7 +67,8 @@ fun BaseOutlinedTextField(
         keyboardActions = keyboardActions,
         interactionSource = interactionSource,
         singleLine = singleLine,
-        maxLines = maxLine,
+        maxLines = maxLines,
+        minLines = minLines,
         decorationBox = @Composable { innerTextField ->
             TextFieldDefaults.run {
                 OutlinedTextFieldDecorationBox(

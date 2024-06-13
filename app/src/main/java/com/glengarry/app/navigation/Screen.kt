@@ -23,6 +23,12 @@ sealed class Screen(val route: String){
     object Purchase: Screen(route = "purchase")
     object Help: Screen(route = "help")
     object Invite: Screen(route = "invite")
+    object FashionMenu: Screen(route = "fashion_menu")
+    object ElectronicMenu: Screen(route = "electronic_menu")
+    object BookMenu: Screen(route = "book_menu")
+    object SportMenu: Screen(route = "sport_menu")
+    object AddBusiness: Screen(route = "add_business")
+
 
     object DetailFashion: Screen(route = "detail_fashion/{$FASHION_ID}"){
         fun generateRoute(fashionId: String): String{

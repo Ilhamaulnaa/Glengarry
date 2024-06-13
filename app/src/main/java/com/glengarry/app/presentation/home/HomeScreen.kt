@@ -28,6 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -52,6 +53,7 @@ import com.glengarry.app.ui.textfield.SearchBarWithFilter
 import com.glengarry.app.ui.theme.GlengarryTheme
 import kotlinx.coroutines.launch
 
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @ExperimentalLayoutApi
@@ -63,6 +65,11 @@ fun HomeScreen(
     navigateToDetailElectronicScreen: () -> Unit = {},
     navigateToDetailBookScreen: () -> Unit = {},
     navigateToDetailSportScreen: () -> Unit = {},
+    navigateToFashionMenuScreen: () -> Unit = {},
+    navigateToElectronicMenuScreen: () -> Unit = {},
+    navigateToBookMenuScreen: () -> Unit = {},
+    navigateToSportMenuScreen: () -> Unit = {},
+
 ) {
 
     val state = rememberModalBottomSheetState(
@@ -128,10 +135,10 @@ fun HomeScreen(
 
     val onMenuClick: (MenuItem) -> Unit = { menu ->
         when(menu.label){
-            R.string.label_fashion -> navigateToDetailFashionScreen()
-            R.string.label_electronic -> navigateToDetailElectronicScreen()
-            R.string.label_book -> navigateToDetailBookScreen()
-            R.string.label_sport -> navigateToDetailSportScreen()
+            R.string.label_fashion -> navigateToFashionMenuScreen()
+            R.string.label_electronic -> navigateToElectronicMenuScreen()
+            R.string.label_book -> navigateToBookMenuScreen()
+            R.string.label_sport -> navigateToSportMenuScreen()
         }
 
     }
@@ -176,6 +183,7 @@ fun HomeScreen(
 
     val onItemClick: (ServiceItem) -> Unit = {
         when (it.type) {
+            ServiceType.ALL -> navigateToDetailFashionScreen()
             ServiceType.FASHION -> navigateToDetailFashionScreen()
             ServiceType.ELECTRONIC -> navigateToDetailElectronicScreen()
             ServiceType.BOOK -> navigateToDetailBookScreen()
@@ -382,6 +390,7 @@ fun HomeScreen(
 
 }
 
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @ExperimentalLayoutApi

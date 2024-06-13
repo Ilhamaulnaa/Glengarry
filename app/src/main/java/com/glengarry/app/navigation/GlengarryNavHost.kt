@@ -5,16 +5,21 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.glengarry.app.presentation.addbusiness.AddBusinessScreen
 import com.glengarry.app.presentation.auth.login.LoginScreen
 import com.glengarry.app.presentation.auth.register.RegisterScreen
 import com.glengarry.app.presentation.book.detail.DetailBookScreen
+import com.glengarry.app.presentation.book.list.BookMenuScreen
 import com.glengarry.app.presentation.electronic.detail.DetailElectronicScreen
+import com.glengarry.app.presentation.electronic.list.ElectronicMenuScreen
 import com.glengarry.app.presentation.fashion.detail.DetailFashionScreen
+import com.glengarry.app.presentation.fashion.list.FashionMenuScreen
 import com.glengarry.app.presentation.main.MainScreen
 import com.glengarry.app.presentation.profile.listmenu.helpsupport.HelpSupportScreen
 import com.glengarry.app.presentation.profile.listmenu.invitefriend.InviteFriendScreen
@@ -22,15 +27,17 @@ import com.glengarry.app.presentation.profile.listmenu.privacy.PrivacyScreen
 import com.glengarry.app.presentation.profile.listmenu.purchase.PurchaseScreen
 import com.glengarry.app.presentation.splashscreen.SplashScreen
 import com.glengarry.app.presentation.sport.detail.DetailSportScreen
+import com.glengarry.app.presentation.sport.list.SportMenuScreen
 import com.glengarry.app.presentation.underconstruction.UnderContructionScreen
 
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @ExperimentalLayoutApi
 @ExperimentalFoundationApi
 @ExperimentalMaterial3Api
 @Composable
 fun GlengarryNavHost(
-    startDestination: Screen = Screen.Main,
+    startDestination: Screen = Screen.Splashscreen,
     navController: NavHostController = rememberNavController()
 ) {
 
@@ -45,7 +52,8 @@ fun GlengarryNavHost(
         composableWithSlideHorizontalAnimation(Screen.Login.route){
             LoginScreen(
                 navigateToRegisterScreen = navController::navigateToRegisterScreen,
-                navigateToMainScreen = navController::navigateToMainScreen
+                navigateToMainScreen = navController::navigateToMainScreen,
+
             )
         }
         composableWithSlideHorizontalAnimation(Screen.Register.route){
@@ -151,7 +159,29 @@ fun GlengarryNavHost(
                 navigateUp = navController::navigateUp
             )
         }
-
+        composableWithSlideHorizontalAnimation(Screen.FashionMenu.route){
+            FashionMenuScreen(
+                navigateUp = navController::navigateUp
+            )
+        }
+        composableWithSlideHorizontalAnimation(Screen.ElectronicMenu.route){
+            ElectronicMenuScreen(
+                navigateUp = navController::navigateUp
+            )
+        }
+        composableWithSlideHorizontalAnimation(Screen.BookMenu.route){
+            BookMenuScreen(
+                navigateUp = navController::navigateUp
+            )
+        }
+        composableWithSlideHorizontalAnimation(Screen.SportMenu.route){
+            SportMenuScreen(
+                navigateUp = navController::navigateUp
+            )
+        }
+        composableWithSlideHorizontalAnimation(Screen.AddBusiness.route){
+            AddBusinessScreen()
+        }
     }
 
 }

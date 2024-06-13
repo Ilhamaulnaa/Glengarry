@@ -15,6 +15,11 @@ interface MainNavigator {
     fun navigateToPurchaseScreen()
     fun navigateToHelpSupportScreen()
     fun navigateToInviteFriendScreen()
+    fun navigateToFashionMenuScreen()
+    fun navigateToElectronicMenuScreen()
+    fun navigateToBookMenuScreen()
+    fun navigateToSportMenuScreen()
+    fun navigateToAddBusinessScreen()
 
 }
 
@@ -32,4 +37,9 @@ object EmptyMainNavigator: MainNavigator{
     override fun navigateToPurchaseScreen() {}
     override fun navigateToHelpSupportScreen() {}
     override fun navigateToInviteFriendScreen() {}
+    override fun navigateToFashionMenuScreen() {}
+    override fun navigateToElectronicMenuScreen() {}
+    override fun navigateToBookMenuScreen() {}
+    override fun navigateToSportMenuScreen() {}
+    override fun navigateToAddBusinessScreen() {}
 }

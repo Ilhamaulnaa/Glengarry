@@ -20,10 +20,12 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddBusiness
 import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
@@ -36,6 +38,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.glengarry.app.navigation.NavMainNavigator
 import com.glengarry.app.navigation.navigateToLoginScreen
+import com.glengarry.app.presentation.addbusiness.AddBusinessScreen
 import com.glengarry.app.presentation.home.HomeScreen
 import com.glengarry.app.presentation.main.component.BottomBar
 import com.glengarry.app.presentation.main.navigation.EmptyMainNavigator
@@ -47,6 +50,7 @@ import com.glengarry.app.presentation.shop.ShopScreen
 import com.glengarry.app.ui.theme.GlengarryTheme
 import com.glengarry.app.ui.theme.darkBlue
 
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @ExperimentalLayoutApi
@@ -72,14 +76,14 @@ fun MainScreen(
                 modifier = Modifier
                     .offset(y = 40.dp)
                     .clip(CircleShape)
-                    .clickable { }
+                    .clickable { mainNavigator.navigateToAddBusinessScreen() }
                     .size(40.dp)
                     .background(Color.White),
                 contentAlignment = Alignment.Center
             ){
                 androidx.compose.material3.Icon(
-                    imageVector = Icons.Filled.QrCodeScanner,
-                    contentDescription = "scan",
+                    imageVector = Icons.Filled.AddBusiness,
+                    contentDescription = "add",
                     tint = Color.Black,
                     modifier = Modifier.size(30.dp)
                 )
@@ -101,6 +105,10 @@ fun MainScreen(
                    navigateToDetailElectronicScreen = mainNavigator::navigateToDetailElectronicScreen,
                    navigateToDetailBookScreen = mainNavigator::navigateToDetailBookScreen,
                    navigateToDetailSportScreen = mainNavigator::navigateToDetailSportScreen,
+                   navigateToFashionMenuScreen = mainNavigator::navigateToFashionMenuScreen,
+                   navigateToElectronicMenuScreen = mainNavigator::navigateToElectronicMenuScreen,
+                   navigateToBookMenuScreen = mainNavigator::navigateToBookMenuScreen,
+                   navigateToSportMenuScreen = mainNavigator::navigateToSportMenuScreen,
 
                )
            }
@@ -124,6 +132,7 @@ fun MainScreen(
     
 }
 
+@ExperimentalComposeUiApi
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @ExperimentalLayoutApi

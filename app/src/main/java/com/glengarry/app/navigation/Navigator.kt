@@ -20,6 +20,11 @@ class NavMainNavigator(
     override fun navigateToPurchaseScreen() { navController.navigateToPurchaseScreen() }
     override fun navigateToHelpSupportScreen() { navController.navigateToHelpSupportScreen() }
     override fun navigateToInviteFriendScreen() { navController.navigateToInviteFriendScreen() }
+    override fun navigateToFashionMenuScreen() { navController.navigateToFashionMenuScreen() }
+    override fun navigateToElectronicMenuScreen() { navController.navigateToElectronicMenuScreen() }
+    override fun navigateToBookMenuScreen() { navController.navigateToBookMenuScreen() }
+    override fun navigateToSportMenuScreen() { navController.navigateToSportMenuScreen() }
+    override fun navigateToAddBusinessScreen() { navController.navigateToAddBusinessScreen() }
 
 }
 
@@ -97,7 +102,26 @@ fun NavHostController.navigateToHelpSupportScreen(){
 fun NavHostController.navigateToInviteFriendScreen(){
     navigate(Screen.Invite.route)
 }
-
+@Throws(IllegalArgumentException::class)
+fun NavHostController.navigateToFashionMenuScreen(){
+    navigate(Screen.FashionMenu.route)
+}
+@Throws(IllegalArgumentException::class)
+fun NavHostController.navigateToElectronicMenuScreen(){
+    navigate(Screen.ElectronicMenu.route)
+}
+@Throws(IllegalArgumentException::class)
+fun NavHostController.navigateToBookMenuScreen(){
+    navigate(Screen.BookMenu.route)
+}
+@Throws(IllegalArgumentException::class)
+fun NavHostController.navigateToSportMenuScreen(){
+    navigate(Screen.SportMenu.route)
+}
+@Throws(IllegalArgumentException::class)
+fun NavHostController.navigateToAddBusinessScreen(){
+    navigate(Screen.AddBusiness.route)
+}
 
 
 

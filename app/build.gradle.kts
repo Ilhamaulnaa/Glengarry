@@ -82,6 +82,9 @@ dependencies {
 
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
+    implementation("com.valentinilk.shimmer:compose-shimmer:1.2.0")
+    implementation("com.github.jkuatdsc:form-builder:1.0.7")
+
     implementation("io.coil-kt:coil-compose:2.5.0")
 
     testImplementation("junit:junit:4.13.2")
