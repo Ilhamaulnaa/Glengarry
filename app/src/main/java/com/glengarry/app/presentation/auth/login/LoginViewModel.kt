@@ -1,5 +1,7 @@
 package com.glengarry.app.presentation.auth.login
 
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.core.domain.model.Resource
@@ -73,6 +75,10 @@ class LoginViewModel (
         _loginUiState.update {
             it.copy(loginResult = Resource.idle)
         }
+    }
+
+    fun showToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
 }

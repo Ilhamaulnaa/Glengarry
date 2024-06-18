@@ -57,7 +57,9 @@ fun GlengarryNavHost(
             )
         }
         composableWithSlideHorizontalAnimation(Screen.Register.route){
-            RegisterScreen()
+            RegisterScreen(
+                navigateToLoginScreen = { navController.navigateToLoginScreen(from = Screen.Login) }
+            )
         }
         composableWithSlideHorizontalAnimation(Screen.Main.route){
             val mainNavigator = NavMainNavigator(navController)

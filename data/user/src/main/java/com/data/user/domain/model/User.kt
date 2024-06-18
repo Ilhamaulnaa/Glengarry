@@ -14,6 +14,8 @@ data class User(
 
     val phoneNumber: String = "",
 
+    val location: String = "",
+
     val lastSignIn: String = "",
 
     val createdAt: String = ""

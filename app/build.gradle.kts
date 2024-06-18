@@ -31,7 +31,11 @@ android {
             )
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -49,11 +53,13 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    buildToolsVersion = "34.0.0"
 }
 
 dependencies {
 
     implementation(project(":core:domain"))
+    implementation(project(":core:network"))
     implementation(project(":common"))
     implementation(project(":data:user"))
 
@@ -86,6 +92,8 @@ dependencies {
     implementation("com.github.jkuatdsc:form-builder:1.0.7")
 
     implementation("io.coil-kt:coil-compose:2.5.0")
+
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs_nio:2.0.4")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

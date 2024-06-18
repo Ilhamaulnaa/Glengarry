@@ -492,7 +492,7 @@ fun BusinessDetail(
 fun AddBusinessScreenPreview() {
     GlengarryTheme {
         Surface {
-            BusinessDetail()
+            BusinessDetail(modifier = Modifier.padding(16.dp))
         }
     }
 }

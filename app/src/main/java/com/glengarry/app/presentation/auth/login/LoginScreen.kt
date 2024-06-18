@@ -1,6 +1,7 @@
 package com.glengarry.app.presentation.auth.login
 
 import android.annotation.SuppressLint
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -31,6 +32,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -55,6 +57,7 @@ import com.glengarry.app.ui.theme.blue
 import com.glengarry.app.ui.theme.darkBlue
 import com.glengarry.app.ui.theme.grey
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.getViewModel
 import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -68,14 +71,18 @@ fun LoginScreen(
     navigateForgotPassword: () -> Unit = {}
 ) {
 
+//    val loginViewModel: LoginViewModel = getViewModel()
+
     val snackBarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+
+    val context = LocalContext.current
 
     val loginUiState by viewModel.loginUiState.collectAsStateWithLifecycle()
     val formState = remember { viewModel.formState }
 
-    val email = formState.getState<TextFieldState>("email")
-    val password = formState.getState<TextFieldState>("password")
+    val emailState = formState.getState<TextFieldState>("email")
+    val passwordState = formState.getState<TextFieldState>("password")
     val loginResult = loginUiState.loginResult
 
     val buttonLoginLoading by viewModel.buttonLoginLoading.collectAsStateWithLifecycle(
@@ -90,12 +97,12 @@ fun LoginScreen(
     }
     var hideErrorDialog = { showErrorDialog = false }
 
-//    var email by remember {
-//        mutableStateOf("")
-//    }
-//    var password by remember {
-//        mutableStateOf("")
-//    }
+    var email by remember {
+        mutableStateOf("")
+    }
+    var password by remember {
+        mutableStateOf("")
+    }
 
     val onLoginClick: () -> Unit = fun() {
         if (!formState.validate()) return
@@ -109,7 +116,8 @@ fun LoginScreen(
 
     val onSignUpWithGoogle: () -> Unit = {
        scope.launch {
-           snackBarHostState.showSnackbar("Sign Up with Google not implement yet")
+//           snackBarHostState.showSnackbar("Sign Up with Google not implement yet")
+           viewModel.showToast(context,"Sign Up with Google not implement yet")
        }
     }
 
@@ -117,7 +125,7 @@ fun LoginScreen(
         if (loginResult is Resource.Error){
             errorDialogMessage = loginResult.message ?: "There is some error"
             showErrorDialog = true
-            password.change("")
+            passwordState.change("")
         }
         if (loginResult is Resource.Success){
             hideErrorDialog()
@@ -183,20 +191,20 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(35.dp))
             BaseLargeTextField(
-                value = email.value,
-                onValueChange = email::change,
+                value = emailState.value,
+                onValueChange = emailState::change,
                 placeholder = "Email",
-                isError = email.hasError,
-                supportingText = email.errorMessage,
+                isError = emailState.hasError,
+                supportingText = emailState.errorMessage,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
             )
             Spacer(modifier = Modifier.height(19.dp))
             BasePasswordTextField(
-                value = password.value,
-                onValueChange = password::change,
+                value = passwordState.value,
+                onValueChange = passwordState::change,
                 placeholder = "Password",
-                isError = password.hasError,
-                supportText = password.errorMessage
+                isError = passwordState.hasError,
+                supportText = passwordState.errorMessage
             )
             Row(
                 modifier = Modifier
@@ -276,7 +284,9 @@ fun LoginDivider(modifier: Modifier = Modifier) {
 fun LoginScreenPreview() {
     GlengarryTheme {
         Surface {
-            LoginScreen()
+            LoginScreen(
+//                viewModel =
+            )
         }
     }
 }
