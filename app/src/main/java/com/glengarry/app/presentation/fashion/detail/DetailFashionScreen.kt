@@ -105,8 +105,7 @@ fun DetailFashionScreen(
         bottomBar = {
             DetailBottomNavigation(
                 modifier = Modifier
-                    .padding(horizontal = 20.dp)
-                    .padding(bottom = 16.dp),
+                    .padding(horizontal = 20.dp),
                 primaryButton = primaryButton,
                 secondaryButton = secondaryButton,
             )

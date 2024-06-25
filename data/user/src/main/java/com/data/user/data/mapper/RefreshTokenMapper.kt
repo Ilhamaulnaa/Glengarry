@@ -5,6 +5,7 @@ import com.data.user.domain.model.RefreshTokenResult
 
 fun RefreshTokenResponse.toDomain(): RefreshTokenResult {
     return RefreshTokenResult(
-        accessToken = accessToken ?: ""
+        accessToken = accessToken ?: "",
+        refreshToken = refreshToken ?: ""
     )
 }

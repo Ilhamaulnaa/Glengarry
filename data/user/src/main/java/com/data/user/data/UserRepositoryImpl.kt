@@ -80,6 +80,8 @@ class UserRepositoryImpl(
                 emit(Resource.Error(message = message))
             }
         }
+    }.catch {
+        emit(Resource.Error(message = it.message))
     }
 
 
@@ -134,6 +136,8 @@ class UserRepositoryImpl(
                 emit(Resource.Error(message = message))
             }
         }
+    }.catch {
+        emit(Resource.Error(message = it.message))
     }
 
     override suspend fun updatePhotoProfile(

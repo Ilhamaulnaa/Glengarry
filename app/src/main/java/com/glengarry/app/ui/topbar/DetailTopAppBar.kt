@@ -2,6 +2,7 @@ package com.glengarry.app.ui.topbar
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -32,7 +33,7 @@ fun DetailTopAppBar(
 ) {
 
     Row (
-        modifier = modifier,
+        modifier = modifier.padding(top = 32.dp),
         verticalAlignment = Alignment.CenterVertically
     ){
 

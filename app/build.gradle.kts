@@ -62,6 +62,7 @@ dependencies {
     implementation(project(":core:network"))
     implementation(project(":common"))
     implementation(project(":data:user"))
+    implementation(project(":data:event"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")

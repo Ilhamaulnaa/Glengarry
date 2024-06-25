@@ -44,15 +44,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0")
 
-    //event
-    implementation("io.insert-koin:koin-core:3.5.3")
-    implementation("io.insert-koin:koin-android:3.5.3")
-    implementation("io.insert-koin:koin-androidx-compose:3.5.3")
-
-    //event
-    api("androidx.paging:paging-runtime-ktx:3.2.1")
-    api("androidx.paging:paging-compose:3.3.0-alpha05")
-
     implementation("com.google.protobuf:protobuf-javalite:3.25.2")
     implementation("androidx.datastore:datastore:1.1.0-beta02")
     implementation("androidx.datastore:datastore-preferences:1.0.0")

@@ -305,6 +305,7 @@ fun HomeScreen(
                         modifier = Modifier
                             .align(Alignment.Start)
                             .padding(horizontal = 20.dp)
+                            .padding(top = 40.dp)
                     )
                     SearchBarWithFilter(
                         modifier = Modifier.padding(horizontal = 20.dp, vertical = 16.dp),

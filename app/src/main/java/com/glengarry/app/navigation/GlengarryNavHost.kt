@@ -182,7 +182,10 @@ fun GlengarryNavHost(
             )
         }
         composableWithSlideHorizontalAnimation(Screen.AddBusiness.route){
-            AddBusinessScreen()
+            AddBusinessScreen(
+                navigateUp = navController::navigateUp,
+                navigateToMainScreen = { navController.navigateToMainScreen(from = Screen.AddBusiness) }
+            )
         }
     }
 

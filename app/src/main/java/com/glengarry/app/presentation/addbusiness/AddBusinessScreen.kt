@@ -46,6 +46,8 @@ import com.glengarry.app.R
 import com.glengarry.app.presentation.addbusiness.component.BusinessImagePicker
 import com.glengarry.app.ui.bottomnavigation.ButtonAttributes
 import com.glengarry.app.ui.bottomnavigation.DetailBottomNavigation
+import com.glengarry.app.ui.dialog.BaseDialog
+import com.glengarry.app.ui.dialog.BaseDialogButton
 import com.glengarry.app.ui.textfield.SmallTextFieldWithLabel
 import com.glengarry.app.ui.textfield.SmalltextFieldWithLabelType
 import com.glengarry.app.ui.topbar.DetailTopAppBar
@@ -63,10 +65,11 @@ enum class AddBusinessDialogState {
 @Composable
 fun AddBusinessScreen(
     modifier: Modifier = Modifier,
+    navigateUp: () -> Unit = {},
     viewModel: AddBusinessViewModel = koinViewModel(),
     type: ServiceType = ServiceType.ALL,
-    formData: FormState<TextFieldState> = FormState(emptyList()),
-    onTypeChanged: (ServiceType) -> Unit = {}
+    onTypeChanged: (ServiceType) -> Unit = {},
+    navigateToMainScreen: () -> Unit = {}
 ) {
 
     val scrollState = rememberScrollState()
@@ -102,23 +105,31 @@ fun AddBusinessScreen(
         }
     }
 
-//    val buttonLoading by viewModel.buttonLoading.collectAsStateWithLifecycle(initialValue = false)
+
+    val buttonLoading by viewModel.buttonLoading.collectAsStateWithLifecycle(initialValue = false)
     var addBusinessDialogState by remember { mutableStateOf(AddBusinessDialogState.NONE) }
 
-    val launchGallery: () -> Unit = {
-        imageLauncher.launch("image/*")
+    val onPrimaryButonCliked: () -> Unit = {
+        if (formState.validate()){
+            addBusinessDialogState = AddBusinessDialogState.CONFIRMATION
+        }
+    }
+
+    val onSecondaryButtonClicked: () -> Unit = {
+        addBusinessDialogState = AddBusinessDialogState.CONFIRMATION_CLOSE
     }
 
     val primaryButton by remember(key1 = primaryButtonTittle){
         mutableStateOf(ButtonAttributes(
             title = primaryButtonTittle,
-            onClick = {}
+            onClick = onPrimaryButonCliked,
+            loading = buttonLoading
         ))
     }
     val secondaryButton by remember(key1 = secondaryButtonTittle) {
         mutableStateOf(ButtonAttributes(
             title = secondaryButtonTittle,
-            onClick = {}
+            onClick = onSecondaryButtonClicked
         ))
     }
 
@@ -172,7 +183,7 @@ fun AddBusinessScreen(
     }
 
     LaunchedEffect(key1 = userPreferences){
-        if (userPreferences.refreshToken.isNotEmpty() && refreshToken !is Resource.Error){
+        if (userPreferences.refreshToken.isNotEmpty() && refreshToken !is Resource.Success){
             viewModel.getRefreshToken(userPreferences.refreshToken)
         }
     }
@@ -185,6 +196,19 @@ fun AddBusinessScreen(
         if (refreshToken is Resource.Error){
             addBusinessDialogState = AddBusinessDialogState.ERROR_REFRESH_TOKEN
         }
+    }
+
+    val hideDialog: () -> Unit = { addBusinessDialogState = AddBusinessDialogState.NONE }
+
+    val addbusiness: () -> Unit = {
+        viewModel.addService(
+            type = type,
+            accessToken = userPreferences.accessToken
+        )
+    }
+
+    val launchGallery: () -> Unit = {
+        imageLauncher.launch("image/*")
     }
 
     val onCategoryCanged: (Int) -> Unit = {
@@ -200,13 +224,79 @@ fun AddBusinessScreen(
 
     val subCategories by remember(key1 = category.value) {
         val categoryValue = when (category.value){
-            categories[1] -> fashionSubCategory
-            categories[2] -> electronicSubCategory
-            categories[3] -> bookSubCategory
-            categories[4] -> sportSubCategory
+            categories[0] -> fashionSubCategory
+            categories[1] -> electronicSubCategory
+            categories[2] -> bookSubCategory
+            categories[3] -> sportSubCategory
             else -> emptyList()
         }
         mutableStateOf(categoryValue)
+    }
+
+    if (addBusinessDialogState != AddBusinessDialogState.NONE) {
+        var dialogMessage = ""
+        var positiveButtonTitle = ""
+        var positiveButtonClick = {}
+        var negativeButtonTitle = ""
+        var negativeButtonClick = {}
+
+        when (addBusinessDialogState) {
+            AddBusinessDialogState.ERROR_REFRESH_TOKEN -> {
+                dialogMessage = "There is some error!"
+                positiveButtonTitle = "Try Again"
+                positiveButtonClick = { viewModel.getRefreshToken(userPreferences.refreshToken) }
+            }
+            AddBusinessDialogState.CONFIRMATION -> {
+                dialogMessage = "Are you sure you want to create a business?"
+                positiveButtonTitle = "Yes"
+                positiveButtonClick = addbusiness
+                negativeButtonTitle = "Cancel"
+                negativeButtonClick = hideDialog
+
+            }
+            AddBusinessDialogState.CONFIRMATION_CLOSE -> {
+                dialogMessage = "Are you sure you want to cancel create business?"
+                positiveButtonTitle = "Yes"
+                positiveButtonClick = navigateUp
+                negativeButtonTitle = "Cancel"
+                negativeButtonClick = hideDialog
+
+            }
+            AddBusinessDialogState.FAILED_CREATE_BUSINESS -> {
+                dialogMessage = "Failed to create business!"
+                positiveButtonTitle = "Try Again"
+                positiveButtonClick = addbusiness
+                negativeButtonTitle = "Cancel"
+                negativeButtonClick = hideDialog
+
+            }
+            AddBusinessDialogState.SUCCESS_CREATE_BUSINESS -> {
+                dialogMessage = "Create business successfully!"
+                positiveButtonTitle = "Ok"
+                positiveButtonClick = navigateToMainScreen
+            }
+            else -> {}
+        }
+
+        val negativeButton = if (
+            addBusinessDialogState == AddBusinessDialogState.CONFIRMATION ||
+            addBusinessDialogState == AddBusinessDialogState.FAILED_CREATE_BUSINESS ||
+            addBusinessDialogState == AddBusinessDialogState.CONFIRMATION_CLOSE
+        ) {
+            BaseDialogButton(
+                title = negativeButtonTitle,
+                onClick = negativeButtonClick
+            )
+        } else null
+
+        BaseDialog(
+            message = dialogMessage,
+            positiveButton = BaseDialogButton(
+                title = positiveButtonTitle,
+                onClick = positiveButtonClick
+            ),
+            negativeButton = negativeButton
+        )
     }
 
     Scaffold(
@@ -218,6 +308,9 @@ fun AddBusinessScreen(
         },
         bottomBar = {
             DetailBottomNavigation(
+                modifier = Modifier
+                    .padding(horizontal = 20.dp)
+                    .padding(bottom = 6.dp),
                 primaryButton = primaryButton,
                 secondaryButton = secondaryButton,
             )
@@ -308,7 +401,6 @@ fun BasicInformationSectionForm(
     }
 
     Column(
-        modifier = modifier.padding(horizontal = 20.dp),
         horizontalAlignment = Alignment.Start
     ) {
         BaseText(
@@ -471,7 +563,7 @@ fun BusinessDetail(
         Spacer(modifier = Modifier.height(8.dp))
         SmallTextFieldWithLabel(
             type = SmalltextFieldWithLabelType.OUTLINED,
-            label = "Price",
+            label = "Price (Rp)",
             value = businessPrice,
             onValueChanged = onBusinessPriceChanged,
             placeholder = "Input Price Here",

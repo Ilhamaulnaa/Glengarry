@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.data.event.di.dataEventModule
 import com.data.user.di.dataUserModule
 import com.glengarry.app.di.addBusinessModule
 import com.glengarry.app.di.authModule
@@ -47,6 +48,7 @@ class MainActivity : ComponentActivity() {
                     addBusinessModule,
                     dataUserModule,
                     coreNetworkModule,
+                    dataEventModule
                 )
             }) {
                 GlengarryTheme {
